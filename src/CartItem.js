@@ -1,5 +1,7 @@
 import React from 'react';
-
+import plus from './assets/plus.png';
+import minus from './assets/minus.png';
+import deleteIcon from './assets/delete.png';
 class CartItem extends React.Component {
     render(){
         return (
@@ -14,6 +16,9 @@ class CartItem extends React.Component {
                 </div>
                 <div className='cart-item-actions'>
                     {/* Buttons to be added */}
+                    <img alt='increase' className='action-icons' src={plus}/>
+                    <img alt='decrease' className='action-icons'src={minus}/>
+                    <img alt='deleteIcon' className='action-icons' src={deleteIcon}/>
 
                 </div>
             </div>
