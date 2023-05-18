@@ -34,7 +34,7 @@ class CartItem extends React.Component {
                     <img alt="deleteButton"
                      className='action-icons' 
                     src={deleteIcon}
-                    // onClick={this.increaseQuantity}
+                    onClick={()=>{this.props.onDeleteProduct(this.props.product.id)}}
                     />
 
                 </div>
