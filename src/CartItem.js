@@ -3,46 +3,12 @@ import plus from './assets/plus.png';
 import minus from './assets/minus.png';
 import deleteIcon from './assets/delete.png';
 class CartItem extends React.Component {
-    constructor (){
-        super();
-        this.state = {
-            price: 999,
-            title: 'Mobile Phone',
-            qty: 1,
-            img: ''
-        }
-      //  this.increaseQuantity = this.increaseQuantity.bind(this);
-    }
-    increaseQuantity = () => {
-        //Form a
-        // this.setState(
-        // {qty: this.state.qty + 1,} 
-        // ,() => { console.log('this state',this.state);}
-        // );
-        this.setState((prevstate) => {
-            return {qty: prevstate.qty + 1,} 
-        }
-        ,() => { console.log('this state',this.state);}
-        );
-    }
-    decreaseQuantity = () => {
-        //destructuring object
-        const {qty} = this.state;
-        if(qty === 0){
-            return;
-        }
-        this.setState((prevState)=>{
-            return {
-                qty: prevState.qty - 1,
-            }
-        }, () => { 
-            console.log('this state',this.state);
-        });
-       
-    }
+
+
     render(){
         //object De-Structuring
-        const {price, title, qty} = this.state;
+        // console.log(this.props)
+        const {price, title, qty} = this.props.product;
         return (
             <div className='cart-item'>
                 <div className='left-block'>
@@ -58,17 +24,17 @@ class CartItem extends React.Component {
                     <img alt="plusButton"
                      className='action-icons' 
                     src={plus}
-                    onClick={this.increaseQuantity}
+                    onClick={()=>{this.props.onIncQuantity(this.props.product)}}
                     />
                     <img alt="minusButton"
                      className='action-icons'
                     src={minus}
-                    onClick={this.decreaseQuantity}
+                    onClick={()=>{this.props.onDecQuantity(this.props.product)}}
                     />
                     <img alt="deleteButton"
                      className='action-icons' 
                     src={deleteIcon}
-                    onClick={this.increaseQuantity}
+                    // onClick={this.increaseQuantity}
                     />
 
                 </div>
