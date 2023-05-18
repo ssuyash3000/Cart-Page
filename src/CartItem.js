@@ -48,7 +48,7 @@ class CartItem extends React.Component {
         return (
             <div className='cart-item'>
                 <div className='left-block'>
-                    <img style={styles.image}/>
+                    <img alt="productpic" style={styles.image}/>
                 </div>
                 <div className='right-block'>
                     <div style={{fontSize:25}} >{title}</div>
@@ -57,17 +57,17 @@ class CartItem extends React.Component {
                 </div>
                 <div className='cart-item-actions'>
                     {/* Buttons to be added */}
-                    <img 
+                    <img alt="plusButton"
                      className='action-icons' 
                     src={plus}
                     onClick={this.increaseQuantity}
                     />
-                    <img 
+                    <img alt="minusButton"
                      className='action-icons'
                     src={minus}
                     onClick={this.decreaseQuantity}
                     />
-                    <img
+                    <img alt="deleteButton"
                      className='action-icons' 
                     src={deleteIcon}
                     onClick={this.increaseQuantity}
