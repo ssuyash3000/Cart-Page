@@ -58,17 +58,17 @@ class CartItem extends React.Component {
                 <div className='cart-item-actions'>
                     {/* Buttons to be added */}
                     <img 
-                    alt='increase' className='action-icons' 
+                     className='action-icons' 
                     src={plus}
                     onClick={this.increaseQuantity}
                     />
                     <img 
-                    alt='decrease' className='action-icons'
+                     className='action-icons'
                     src={minus}
                     onClick={this.decreaseQuantity}
                     />
                     <img
-                    alt='deleteIcon' className='action-icons' 
+                     className='action-icons' 
                     src={deleteIcon}
                     onClick={this.increaseQuantity}
                     />
