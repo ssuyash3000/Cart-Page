@@ -14,16 +14,14 @@ class CartItem extends React.Component {
       //  this.increaseQuantity = this.increaseQuantity.bind(this);
     }
     increaseQuantity = () => {
-        this.setState(
-        {qty: this.state.qty + 1,} 
-        ,() => { console.log('this state',this.state);}
-        );
-        this.setState(
-        {qty: this.state.qty + 1,} 
-        ,() => { console.log('this state',this.state);}
-        );
-        this.setState(
-        {qty: this.state.qty + 5,} 
+        //Form a
+        // this.setState(
+        // {qty: this.state.qty + 1,} 
+        // ,() => { console.log('this state',this.state);}
+        // );
+        this.setState((prevstate) => {
+            return {qty: prevstate.qty + 1,} 
+        }
         ,() => { console.log('this state',this.state);}
         );
     }
