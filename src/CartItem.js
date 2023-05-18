@@ -14,20 +14,33 @@ class CartItem extends React.Component {
       //  this.increaseQuantity = this.increaseQuantity.bind(this);
     }
     increaseQuantity = () => {
-        this.setState((prevState)=>{
-            return {
-                qty: prevState.qty + 1,
-            }
-        });
-        console.log('this state',this.state);
+        this.setState(
+        {qty: this.state.qty + 1,} 
+        ,() => { console.log('this state',this.state);}
+        );
+        this.setState(
+        {qty: this.state.qty + 1,} 
+        ,() => { console.log('this state',this.state);}
+        );
+        this.setState(
+        {qty: this.state.qty + 5,} 
+        ,() => { console.log('this state',this.state);}
+        );
     }
     decreaseQuantity = () => {
+        //destructuring object
+        const {qty} = this.state;
+        if(qty === 0){
+            return;
+        }
         this.setState((prevState)=>{
             return {
                 qty: prevState.qty - 1,
             }
+        }, () => { 
+            console.log('this state',this.state);
         });
-        console.log('this state',this.state);
+       
     }
     render(){
         //object De-Structuring
