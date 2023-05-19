@@ -1,8 +1,10 @@
 import React from 'react';
 import Cart from './Cart';
+import NavBar from './NavBar';
 function App() {
   return (
     <div className="App">
+      <NavBar/>
       <Cart/>
 
     </div>

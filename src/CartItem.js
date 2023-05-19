@@ -8,7 +8,8 @@ class CartItem extends React.Component {
     render(){
         //object De-Structuring
         // console.log(this.props)
-        const {price, title, qty} = this.props.product;
+        const {product, onIncQuantity,  onDecQuantity, onDeleteProduct} = this.props;
+        const {price, title, qty} = product;
         return (
             <div className='cart-item'>
                 <div className='left-block'>
@@ -24,17 +25,17 @@ class CartItem extends React.Component {
                     <img alt="plusButton"
                      className='action-icons' 
                     src={plus}
-                    onClick={()=>{this.props.onIncQuantity(this.props.product)}}
+                    onClick={()=>{onIncQuantity(product)}}
                     />
                     <img alt="minusButton"
                      className='action-icons'
                     src={minus}
-                    onClick={()=>{this.props.onDecQuantity(this.props.product)}}
+                    onClick={()=>{onDecQuantity(product)}}
                     />
                     <img alt="deleteButton"
                      className='action-icons' 
                     src={deleteIcon}
-                    onClick={()=>{this.props.onDeleteProduct(this.props.product.id)}}
+                    onClick={()=>{onDeleteProduct(product.id)}}
                     />
 
                 </div>
