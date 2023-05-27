@@ -1,20 +1,19 @@
 import React from 'react';
 import cartIcon from './assets/shopping-cart.png';
-class NavBar extends React.Component {
-
-
-    render(){
- 
-        return (
-            <div style={styles.nav} className='nav-bar'>
-                <div style={styles.cartIconContainer}>
-                <img  style={styles.cartIcon} alt="cart-icon" src={cartIcon} />
-                <span style={styles.cartCount} id="product-count">4</span>
-                </div>
+// class NavBar extends React.Component {
+    // render(){
+const NavBar = (props) => {
+    return (
+        <div style={styles.nav} className='nav-bar'>
+            <div style={styles.cartIconContainer}>
+            <img  style={styles.cartIcon} alt="cart-icon" src={cartIcon} />
+            <span style={styles.cartCount} id="product-count">{props.count}</span>
             </div>
-        )
-    }
+        </div>
+    );
+    // }
 }
+// }
 const styles = {
     cartIcon: {
       height: 32,
