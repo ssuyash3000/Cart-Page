@@ -6,19 +6,20 @@ import deleteIcon from './assets/delete.png';
 // class CartItem extends React.Component {
 const CartItem = (props) => {
     // render(){
-    // console.log(this.props)
+    // console.log(this.props) //When Component is class component then we access porps using this reference 
     //object De-Structuring
     const {product, onIncQuantity,  onDecQuantity, onDeleteProduct} = props;
     const {price, title, qty} = product;
     return (
         <div className='cart-item'>
             <div className='left-block'>
-                <img alt="productpic" style={styles.image}/>
+                <img alt="productpic" style={styles.image} src={product.img}/>
             </div>
             <div className='right-block'>
                 <div style={{fontSize:25}} >{title}</div>
-                <div style={{color:'#777'}} >Rs {price}</div>
+                <div style={{color:'#777'}} >One item price ₹ {price}/-</div>
                 <div style={{color:'#777'}} >Qty: {qty}</div>
+                <div style={{color:'#777'}} >Total Price ₹ {price*qty}/-</div>
             </div>
             <div className='cart-item-actions'>
                 {/* Buttons to be added */}
