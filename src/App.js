@@ -1,27 +1,40 @@
 import React from 'react';
 import Cart from './Cart';
 import NavBar from './NavBar';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 class App extends React.Component {
   constructor (){
     super();
     this.state = {
-       products: [
-        { 
-            price: 99,
-            title: "Watch",
-            qty: 1,
-            img: 'https://images.unsplash.com/photo-1495857000853-fe46c8aefc30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-            id: 1,
-        },
-        {
-            price: 99,
-            title: "Shoes",
-            qty: 1,
-            img: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
-            id: 2,
-        }
-       ]
+
+      products: [],//we will fetch data from firebase 
+      //  products: [
+      //   { 
+      //       price: 99,
+      //       title: "Watch",
+      //       qty: 1,
+      //       img: 'https://images.unsplash.com/photo-1495857000853-fe46c8aefc30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      //       id: 1,
+      //   },
+      //   {
+      //       price: 99,
+      //       title: "Shoes",
+      //       qty: 1,
+      //       img: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+      //       id: 2,
+      //   }
+      //  ]
     }
+}
+componentDidMount () {
+  firebase
+    .firestore()
+    .collection('products')
+    .get()
+    .then((snapshot)=>{
+      console.log(snapshot);
+    })
 }
 handleIncQuantity = (prod) =>{
     // console.log("Inc Quantity of " + prod.title);
