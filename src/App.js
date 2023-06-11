@@ -9,22 +9,8 @@ class App extends React.Component {
     this.state = {
 
       products: [],//we will fetch data from firebase 
-      //  products: [
-      //   { 
-      //       price: 99,
-      //       title: "Watch",
-      //       qty: 1,
-      //       img: 'https://images.unsplash.com/photo-1495857000853-fe46c8aefc30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      //       id: 1,
-      //   },
-      //   {
-      //       price: 99,
-      //       title: "Shoes",
-      //       qty: 1,
-      //       img: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
-      //       id: 2,
-      //   }
-      //  ]
+      loader: true,
+ 
     }
 }
 componentDidMount () {
@@ -34,6 +20,19 @@ componentDidMount () {
     .get()
     .then((snapshot)=>{
       console.log(snapshot);
+
+      // snapshot.docs.map((document) => {
+      //   console.log(document.data());
+      // });
+      const prod =  snapshot.docs.map((document) => {
+          const data = document.data();
+          data['id'] = document.id;
+          return data;
+        });
+      this.setState({
+        products: prod,
+        loader: false,
+      });
     })
 }
 handleIncQuantity = (prod) =>{
@@ -89,6 +88,7 @@ getProdcutCountCost = () => {
     return (
       <div className="App">
         <NavBar count={this.getProdcutCountCost().count}/>
+        {this.state.loader === true && <h1>Loading Data</h1>}
         <Cart
           products={this.state.products} 
           onIncQuantity={this.handleIncQuantity}
