@@ -14,26 +14,44 @@ class App extends React.Component {
     }
 }
 componentDidMount () {
-  firebase
+    firebase
     .firestore()
     .collection('products')
-    .get()
-    .then((snapshot)=>{
+    .onSnapshot((snapshot)=>{
       console.log(snapshot);
 
-      // snapshot.docs.map((document) => {
-      //   console.log(document.data());
-      // });
       const prod =  snapshot.docs.map((document) => {
           const data = document.data();
           data['id'] = document.id;
           return data;
         });
+
       this.setState({
         products: prod,
         loader: false,
       });
-    })
+      
+    });
+  // firebase
+  //   .firestore()
+  //   .collection('products')
+  //   .get()
+  //   .then((snapshot)=>{
+  //     console.log(snapshot);
+
+  //     // snapshot.docs.map((document) => {
+  //     //   console.log(document.data());
+  //     // });
+  //     const prod =  snapshot.docs.map((document) => {
+  //         const data = document.data();
+  //         data['id'] = document.id;
+  //         return data;
+  //       });
+  //     this.setState({
+  //       products: prod,
+  //       loader: false,
+  //     });
+  //   });
 }
 handleIncQuantity = (prod) =>{
     // console.log("Inc Quantity of " + prod.title);
@@ -50,8 +68,8 @@ handleDeleteProduct = (id) => {
     //fetching the prodcuts array
    const prodcuts = this.state.products;
    const items = prodcuts.filter((prod)=>{
-                   return prod.id !== id;
-               });
+        return prod.id !== id;
+    });
    this.setState({
        products: items,
    });
@@ -88,7 +106,7 @@ getProdcutCountCost = () => {
     return (
       <div className="App">
         <NavBar count={this.getProdcutCountCost().count}/>
-        {this.state.loader === true && <h1>Loading Data</h1>}
+        {this.state.loader === true && <h1>Loading Data...</h1>}
         <Cart
           products={this.state.products} 
           onIncQuantity={this.handleIncQuantity}
