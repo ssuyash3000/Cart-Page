@@ -23,12 +23,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = firebase.firestore();
+console.log(db);
 /////////////////////////////////////////////////////////////////////////////
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
