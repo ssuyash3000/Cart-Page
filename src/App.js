@@ -10,13 +10,14 @@ class App extends React.Component {
 
       products: [],//we will fetch data from firebase 
       loader: true,
- 
+      db: firebase.firestore().collection('products'),
     }
 }
 componentDidMount () {
-    firebase
-    .firestore()
-    .collection('products')
+    // firebase
+    // .firestore()
+    // .collection('products')
+    this.state.db
     .onSnapshot((snapshot)=>{
       console.log(snapshot);
 
@@ -30,7 +31,7 @@ componentDidMount () {
         products: prod,
         loader: false,
       });
-      
+
     });
   // firebase
   //   .firestore()
@@ -102,10 +103,27 @@ getProdcutCountCost = () => {
   }
 
 }
+handleAddProd = () => {
+  //firebase.firestore.collection('products') -> Since this is being used again and again
+  // we will store the refrence to this DB in our state 
+  this.state.db.add({
+    img: '',
+    title: 'Washing Machine',
+    price: 5999,
+    qty: 2,
+
+  }).then((docRef)=>{
+    console.log(docRef);
+  }).catch(()=>{
+    console.log("Error in adding product")
+  }) 
+  
+}
   render() {
     return (
       <div className="App">
         <NavBar count={this.getProdcutCountCost().count}/>
+        <button onClick={this.handleAddProd} style={{padding: 20, font: 20}}>Add Product</button>
         {this.state.loader === true && <h1>Loading Data...</h1>}
         <Cart
           products={this.state.products} 
