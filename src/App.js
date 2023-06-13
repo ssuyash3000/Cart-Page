@@ -19,7 +19,7 @@ componentDidMount () {
     // .collection('products')
     this.state.db
     .onSnapshot((snapshot)=>{
-      console.log(snapshot);
+      //console.log(snapshot);
 
       const prod =  snapshot.docs.map((document) => {
           const data = document.data();
@@ -60,11 +60,20 @@ handleIncQuantity = (prod) =>{
     const products = this.state.products;
     //searching for the required product
     const index = products.indexOf(prod);
-    products[index].qty += 1;
-    this.setState({
-        products:products,
-    });
+    //console.log((products[index]));
+    const prodRef = this.state.db.doc(products[index].id);
+
+    prodRef.update({
+      qty: products[index].qty + 1,
+    }).then(()=>{
+      console.log("Inc Updation Success");
+    })
+    // products[index].qty += 1;
+    // this.setState({
+    //     products:products,
+    // });
 } 
+
 handleDeleteProduct = (id) => {
     //fetching the prodcuts array
    const prodcuts = this.state.products;
@@ -81,14 +90,21 @@ handleDecQuantity = (prod) =>{
     const products = this.state.products;
     //searching for the required product
     const index = products.indexOf(prod);
-    products[index].qty -= 1;
-    if(products[index].qty === 0){
-        this.handleDeleteProduct(products[index].id);
-        return;
-    }
-    this.setState({
-        products:products,
-    });
+    // products[index].qty -= 1;
+    // if(products[index].qty === 0){
+    //     this.handleDeleteProduct(products[index].id);
+    //     return;
+    // }
+    // this.setState({
+    //     products:products,
+    // });
+    const prodRef = this.state.db.doc(products[index].id);
+
+    prodRef.update({
+      qty: products[index].qty - 1,
+    }).then(()=>{
+      console.log("Dec Updation Success");
+    })
 } 
 getProdcutCountCost = () => {
   let count = 0;
