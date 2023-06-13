@@ -75,14 +75,22 @@ handleIncQuantity = (prod) =>{
 } 
 
 handleDeleteProduct = (id) => {
-    //fetching the prodcuts array
-   const prodcuts = this.state.products;
-   const items = prodcuts.filter((prod)=>{
-        return prod.id !== id;
-    });
-   this.setState({
-       products: items,
-   });
+  //fetching the prodcuts array
+  //  const prodcuts = this.state.products;
+  //  const items = prodcuts.filter((prod)=>{
+  //       return prod.id !== id;
+  //   });
+  //  this.setState({
+  //      products: items,
+  //  });
+  const prodRef = this.state.db.doc(id);
+  prodRef
+  .delete()
+  .then(()=>{
+    console.log("deleted Successfully");
+  }).catch(()=>{
+    console.log("deletion failed");
+  })
 }
 handleDecQuantity = (prod) =>{
     // console.log("Dec Quantity of " + prod.title);
@@ -99,12 +107,18 @@ handleDecQuantity = (prod) =>{
     //     products:products,
     // });
     const prodRef = this.state.db.doc(products[index].id);
-
+    if(products[index].qty === 0){
+      // this.handleDecQuantity(products[index].id);
+      return;
+    }
     prodRef.update({
       qty: products[index].qty - 1,
     }).then(()=>{
       console.log("Dec Updation Success");
     })
+    if(products[index].qty === 0){
+      this.handleDecQuantity(products[index].id);
+    }
 } 
 getProdcutCountCost = () => {
   let count = 0;
