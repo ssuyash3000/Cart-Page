@@ -14,10 +14,9 @@ class App extends React.Component {
     }
 }
 componentDidMount () {
-    // firebase
-    // .firestore()
-    // .collection('products')
-    this.state.db
+    firebase
+    .firestore()
+    .collection('products').where("price", "<=",9999)
     .onSnapshot((snapshot)=>{
       //console.log(snapshot);
 
@@ -90,7 +89,7 @@ handleDeleteProduct = (id) => {
     console.log("deleted Successfully");
   }).catch(()=>{
     console.log("deletion failed");
-  })
+  });
 }
 handleDecQuantity = (prod) =>{
     // console.log("Dec Quantity of " + prod.title);
@@ -98,6 +97,17 @@ handleDecQuantity = (prod) =>{
     const products = this.state.products;
     //searching for the required product
     const index = products.indexOf(prod);
+    console.log(products);
+    const prodRef = this.state.db.doc(products[index].id);
+    if(products[index].qty === 1){
+      this.handleDeleteProduct(products[index].id);
+      return;
+    }
+    prodRef.update({
+      qty: products[index].qty - 1,
+    }).then(()=>{
+      console.log("Dec Updation Success");
+    })
     // products[index].qty -= 1;
     // if(products[index].qty === 0){
     //     this.handleDeleteProduct(products[index].id);
@@ -106,19 +116,6 @@ handleDecQuantity = (prod) =>{
     // this.setState({
     //     products:products,
     // });
-    const prodRef = this.state.db.doc(products[index].id);
-    if(products[index].qty === 0){
-      // this.handleDecQuantity(products[index].id);
-      return;
-    }
-    prodRef.update({
-      qty: products[index].qty - 1,
-    }).then(()=>{
-      console.log("Dec Updation Success");
-    })
-    if(products[index].qty === 0){
-      this.handleDecQuantity(products[index].id);
-    }
 } 
 getProdcutCountCost = () => {
   let count = 0;
